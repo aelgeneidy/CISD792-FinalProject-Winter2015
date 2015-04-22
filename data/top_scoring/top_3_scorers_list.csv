@@ -1,0 +1,76 @@
+year,player,countryCode,country,goals,rank
+1930,Guillermo STABILE,ARG,Argentina,8,1
+1930,Pedro CEA,URU,Uruguay,5,2
+1930,Bert PATENAUDE,USA,United States,4,3
+1930,Guillermo SUBIABRE,CHI,Chile,4,3
+1934,Oldrich NEJEDLY,TCH,Czechoslovakia,5,1
+1934,Edmund CONEN,GER,Germany,4,2
+1934,Angelo SCHIAVIO,ITA,Italy,4,2
+1938,LEONIDAS,BRA,Brazil,7,1
+1938,Gyula ZSENGELLER,HUN,Hungary,5,2
+1938,Silvio PIOLA,ITA,Italy,5,3
+1938,Gyorgy SAROSI,HUN,Hungary,5,3
+1950,ADEMIR,BRA,Brazil,8,1
+1950,Estanislao BASORA,ESP,Spain,5,2
+1950,Oscar MIGUEZ,URU,Uruguay,4,3
+1954,Sandor KOCSIS,HUN,Hungary,11,1
+1954,Sepp HUEGI,SUI,Switzerland,6,2
+1954,Max MORLOCK,FRG,Germany FR,6,2
+1954,Erich PROBST,AUT,Austria,6,2
+1958,Just FONTAINE,FRA,France,13,1
+1958,PELÉ [Edson Arantes do Nascimento],BRA,Brazil,6,2
+1958,Helmut RAHN,FRG,Germany FR,6,2
+1962,Florian ALBERT,HUN,Hungary,4,1
+1962,Valentin IVANOV,URS,Soviet Union,4,1
+1962,Drazen JERKOVIC,YUG,Yugoslavia,4,1
+1962,Leonel SANCHEZ,CHI,Chile,4,1
+1962,VAVA,BRA,Brazil,4,1
+1962,GARRINCHA,BRA,Brazil,4,1
+1966,EUSEBIO [Eusebio da Silva Ferreira],POR,Portugal,9,1
+1966,Helmut HALLER,FRG,Germany FR,6,2
+1966,Franz BECKENBAUER,FRG,Germany FR,4,3
+1966,Ferenc BENE,HUN,Hungary,4,3
+1966,Geoff HURST,ENG,England,4,3
+1966,Valeriy PORKUYAN,URS,Soviet Union,4,3
+1970,Gerd MUELLER,FRG,Germany FR,10,1
+1970,JAIRZINHO,BRA,Brazil,7,2
+1970,Teofilo CUBILLAS,PER,Peru,5,3
+1974,Grzegorz LATO,POL,Poland,7,1
+1974,Johan NEESKENS,NED,Netherlands,5,2
+1974,Andrzej SZARMACH,POL,Poland,5,2
+1978,Mario KEMPES,ARG,Argentina,6,1
+1978,Teofilo CUBILLAS,PER,Peru,5,2
+1978,Rob RENSENBRINK,NED,Netherlands,5,2
+1982,Paolo ROSSI,ITA,Italy,6,1
+1982,Karl-Heinz RUMMENIGGE,FRG,Germany FR,5,2
+1982,ZICO,BRA,Brazil,4,3
+1982,Zbigniew Boniek,POL,Poland,4,3
+1986,Gary LINEKER,ENG,England,6,1
+1986,Emilio BUTRAGUENO,ESP,Spain,5,2
+1986,CARECA,BRA,Brazil,5,2
+1986,Diego MARADONA,ARG,Argentina,5,2
+1990,Salvatore SCHILLACI,ITA,Italy,6,1
+1990,Tomas SKUHRAVY,TCH,Czechoslovakia,5,2
+1990,Roger MILLA,CMR,Cameroon,4,3
+1990,Preben Elkjær Larsen,DEN,Denmark,4,3
+1990,Alessandro Altobelli,ITA,Italy,4,3
+1990,Jorge Valdano,ARG,Argentina,4,3
+1994,Oleg SALENKO,RUS,Russia,6,1
+1994,Hristo STOICHKOV,BUL,Bulgaria,6,1
+1994,Kennet ANDERSSON,SWE,Sweden,5,3
+1994,ROMÁRIO [Romário de Souza Faria],BRA,Brazil,5,3
+1998,Davor SUKER,CRO,Croatia,6,1
+1998,Gabriel BATISTUTA,ARG,Argentina,5,2
+1998,Christian VIERI,ITA,Italy,5,2
+2002,RONALDO,BRA,Brazil,8,1
+2002,Miroslav KLOSE,GER,Germany,5,2
+2002,RIVALDO,BRA,Brazil,5,2
+2006,Miroslav KLOSE,GER,Germany,5,1
+2006,Hernan CRESPO,ARG,Argentina,3,2
+2006,RONALDO,BRA,Brazil,3,3
+2010,Thomas MUELLER,GER,Germany,5,1
+2010,David Villa,ESP,Spain,5,2
+2010,Wesley Sneijder,NED,Netherlands,5,3
+2014,James RODRIGUEZ,COL,Colombia,6,1
+2014,Thomas MUELLER,GER,Germany,5,2
+2014,Neymar,BRA,Brazil,4,3

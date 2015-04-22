@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
+	<head>
+		<title>CISD 792 - Computer Graphics Final Project</title>
+	
+		<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+		
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<link rel="stylesheet" type="text/css" href="css/screen.css" media="screen" />
+		
+		<script type="text/javascript" src="./libs/jquery-1.11.1"></script>
+
+		<script type="">
+			$(document).ready(function(){
+				$("#nav li").hover(
+				function(){
+					$(this).children('ul').hide();
+					$(this).children('ul').slideDown('fast');
+				},
+				function () {
+					$('ul', this).slideUp('fast');            
+				});
+			});
+		</script>
+		
+	</head>
+
+	<body>
+
+		<div id="header">
+			<h1>World Cup Statistics</h1>
+			<h3>by</h3>
+			<h2>Aiman Darwiche and Ayman El-Geneidy</h2>
+			<p> </p>
+		</div>
+	
+		<div class="colmask rightmenu">
+			<div class="colleft">
+				<div class="col1">
+					<!-- Column 1 start -->
+					
+					<ul id="nav">
+						<li class="site-name"><a href="#">&nbsp;</a></li>
+						<li><a href="#">Teams</a>
+							<ul>
+								<li><a href="teams_by_tournament.html" target="_blank">Teams by Tournament</a></li>
+								<li><a href="graphchooser.html" target="_blank">Info by Date Range</a></li>
+								<li><a href="teamsperregion.html" target="_blank">Teams per Region</a></li>
+								<li><a href="participationmap.html" target="_blank">Participations</a></li>
+							</ul>
+						</li>
+							
+						<li><a href="#">Hosts</a>
+							<ul>
+								<li><a href="hostsmap.html" target="_blank">Hosts Map</a></li>
+							</ul>
+						</li>
+
+						<li><a href="#">Team Performance</a>
+							<ul>
+								<li><a href="wc_teams_participation.html" target="_blank">Participations</a></li>
+								<li><a href="wc_teams_games.html" target="_blank">Games</a></li>
+								<li><a href="wc_teams_goals.html" target="_blank">Goals</a></li>
+								<li><a href="wc_teams_points.html" target="_blank">Points</a></li>
+							</ul>
+						</li>
+							
+						<li><a href="#">Awards</a>
+							<ul>
+								<li><a href="top_4_awards_by_region.html" target="_blank">Top 4 Awards by Region</a></li>
+								<li><a href="championsmap.html" target="_blank">Champions Map</a></li>
+								<li><a href="countriessecondplace.html" target="_blank">Second Place Countries</a></li>
+								<li><a href="countriesthirdplace.html" target="_blank">Third Place Countries</a></li>
+								<li><a href="countriesfourthplace.html" target="_blank">Fourth Place Countries</a></li>
+								<li><a href="bestgoalkeeperscountries.html" target="_blank">Best Goal Keepers Countries</a></li>
+								<li><a href="bestplayerscountries.html" target="_blank">Best Players Countries</a></li>
+								<li><a href="bestyoungplayercountries.html" target="_blank">Best Young player Countries</a></li>
+								<li><a href="mostentertainingcountries.html" target="_blank">Most Entertaining Countries</a></li>
+							</ul>
+						</li>
+							
+						<li><a href="#">Best Players</a>
+							<ul>
+								<li><a href="topplayerscountries.html" target="_blank">Top Players Countries</a></li>						
+							</ul>
+						</li>
+
+						<li><a href="#">Matches</a>
+							<ul>
+								<li><a href="worldcupchampions.html" target="_blank">World Cup Champions</a></li>
+								<li><a href="worldcuphosts.html" target="_blank">World Cup Hosts</a></li>
+							</ul>
+						</li>
+							
+						<li><a href="#">Top Scoring</a>
+							<ul>
+								<li><a href="topscoringcountries.html" target="_blank">Top Scoring Countries</a></li>
+							</ul>
+						</li>
+
+						<li><a href="#">Fair Play</a>
+							<ul>
+								<li><a href="topfaircountries.html" target="_blank">Top Fair Play Countries</a></li>
+							</ul>
+						</li>
+						
+					</ul>
+					
+					<h1>Welcome to our final project page!</h1>
+				
+					<p>The current work provides statistical measures about soccer World Cup and applies the computer graphics concepts that were learned throughout 
+					   the course to implement statistical graphs and non-traditional data representation bringing data to life. Spanning for over 84 years and 20 
+					   tournaments, the World Cup provides a wealth of statistical data that can be used with a variety of visualization techniques.
+					</p>
+				
+					<h2>Tools and References</h2>
+					
+					<ul>
+						<li><p> <a href="http://www.fifa.com" target="_blank">Fédération Internationale de Football Association (FIFA)</a></p></li>
+						<li><p> <a href="http://threegraphs.com/" target="_blank">Three Graphs - 3D charts for the web</a></p></li>
+						<li><p> <a href="http://threejs.org/" target="_blank">Three.js - Javascript 3D library</a></p></li>	  
+						<li><p> <a href="http://www.threejsgames.com" target="_blank">Three.js Games - All you need to build Games with THREE.js</a></p></li>
+						<li><p> <a href="http://visjs.org/" target="_blank">vis.js - A dynamic, browser based visualization library</a></p></li>
+						<li><p> <a href="http://en.wikipedia.org/wiki/FIFA_World_Cup_records" target="_blank">FIFA World Cup records</a></p></li>
+						<li><p> <a href="http://en.wikipedia.org/wiki/List_of_FIFA_country_codes" target="_blank">Three.js - Javascript 3D library</a></p></li>
+						<li><p> <a href="http://www.worldcup-history.com/index.php?siden=statistikk" target="_blank">Worldcup-history.com</a></p></li>
+					</ul>
+					
+					<p> </p>
+					
+					<h2>Introduction</h2>
+		
+					<p>The World Cup is the one of the biggest international sporting events (second only to the Summer Olympic Games). The event is held every 
+					   four years where currently 32 nations compete for the biggest soccer's prize. The tournament started in 1930 with 13 nations and the last 
+					   tournament was held in 2014. The 1942 and 1946 tournaments were cancelled as a result of World War II. There were a total of 20 tournaments. 
+					   The next event will be held in Russia in 2018.
+					</p>
+				
+					<h3>Disclaimer</h3>
+				
+					<p>This is not an official record-keeping site. It is simply a final project for a graphics course. We are neither affiliated with nor endorsed by 
+					   any of the sites we referenced. 
+					</p>
+					
+					<p> </p>
+					<p> </p>
+					<p> </p>
+				</dl>
+				<!-- Column 1 end -->
+			</div>
+			<div class="col2">
+				<!-- Column 2 start -->
+				<div id="ads">
+					<img src="img/AllFIFAWorldCup.png" />
+					<p> </p>
+					
+					<img src="img/trophy.jpg" />
+					<p> </p>
+					
+					<img src="img/soccerball.jpg" />		
+					<p> </p>
+				</div>
+				<!-- Column 2 end -->
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<p> &copy; Copyright 2015 by Aiman Darwiche and Ayman El-Geneidy</p>
+	</div>
+
+	</body>
+</html>

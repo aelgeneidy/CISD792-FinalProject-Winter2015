@@ -1,0 +1,206 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Graph Chooser</title>
+        <!-- load handlebars for templating, and create a template -->
+        <script src="./vis/handlebars-v3.0.0.js"></script>
+        <script src="./vis/vis.js"></script>
+        <link href="./vis/vis.css" rel="stylesheet" type="text/css" />
+
+        <script id="item-template" type="text/x-handlebars-template">
+            <table class="score">
+                <tr>
+                    <td class="description"></td>
+                </tr>
+                <tr>
+                    <td id="buildHtml"><a href="{{content}}" target="_blank">{{id}}</a></td>
+                </tr>
+            </table>
+        </script>
+
+        <style type="text/css">
+            body, html {
+                font-family: sans-serif;
+                font-size: 10pt;
+                background-color: lightblue;
+            }
+
+            h1 {
+                color: #011f4b;
+            }
+            h3 {
+                color: #011f4b;
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+            p {
+                color: darkgreen;
+            }
+            /*Outside Border and timeline box*/
+            .vis.timeline.root {
+                border: 2px solid red;
+                font-family: purisa, 'comic sans', cursive;
+                font-size: 12pt;
+                background: #011f4b;
+            }
+            
+            /*Color fill Inside item box*/
+            .vis.timeline .item {
+                border-color: #005b96;
+                background-color: lightblue;
+                font-size: 15pt;
+                color: #011f4b; 
+                box-shadow: 5px 5px 20px rgba(128,128,128, 0.5);
+            }
+                /*item box Border*/
+                .vis.timeline .item,
+                .vis.timeline .item.line {
+                    border-width: 3px;
+                }
+                    /*The dot going from line to item box*/
+                    .vis.timeline .item.dot {
+                        border-width: 10px;
+                        border-radius: 10px;
+                    }
+
+                    .vis.timeline .item.selected {
+                        border-color: green;
+                        background-color: lightgreen;
+                    }
+
+            .vis.timeline .timeaxis .text {
+                color: red;
+                padding-top: 10px;
+                padding-left: 10px;
+            }
+
+                .vis.timeline .timeaxis .text.major {
+                    font-weight: bold;
+                }
+
+            .vis.timeline .timeaxis .grid.minor {
+                border-width: 2px;
+                border-color: white;
+            }
+
+            .vis.timeline .timeaxis .grid.major {
+                border-width: 2px;
+                border-color: #F991A3;
+            }
+
+            table .description {
+                font-style: italic;
+            }
+
+            #visualization {
+                position: relative;
+                overflow: hidden;
+            }
+
+            .logo {
+                position: absolute;
+                right: 10px;
+                top: 10px;
+            }
+
+                .logo img {
+                    width: 120px;
+                }
+
+            option.blue {
+                background-color: white;
+                font-weight: bold;
+                font-size: 14px;
+                color: navy;
+            }
+
+            option.pink {
+                background-color: #ffcccc;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 class="">Graph and Tournament Range Chooser</h1>
+        <p style="max-width: 600px;">This timeline helps choose a range and graph to show certain FIFA World Cup Statistics.</p>
+
+        <div id="visualization">
+            <h3 style="max-width: 600px;">
+                Select a Graph:
+                <select id="ddGraph" onchange="reLoad()">
+                    <option class="blue" value="toptengoalsscored.html">FIFA Top Ten All Time Goals</option>
+                    <option class="blue" value="regions_by_tournament.html">Regions By Tournament</option>
+                </select>
+            </h3>
+        </div>
+        <br />
+        <br />
+        <div id="visualization">
+            <div class="logo"><img src="./img/trophy.jpg"></div>
+        </div>
+
+        <script type="text/javascript">
+            // create a handlebars template
+            var source   = document.getElementById('item-template').innerHTML;
+            var template = Handlebars.compile(document.getElementById('item-template').innerHTML);
+
+            // DOM element where the Timeline will be attached
+            var container = document.getElementById('visualization');
+            
+            
+
+            var items = new vis.DataSet();
+             
+            function loadValues() {
+                var e = document.getElementById("ddGraph");
+                var strLink = e.options[e.selectedIndex].value;
+                strLink = strLink + "?myRange=";
+                var strLinks = [];
+                strLinks[0] = strLink + "1930-1950";
+                strLinks[1] = strLink + "1954-1966";
+                strLinks[2] = strLink + "1970-1982";
+                strLinks[3] = strLink + "1986-1998";
+                strLinks[4] = strLink + "2002-2014";
+
+                var strID = [];
+                strID[0] = "1930-1950";
+                strID[1] = "1954-1966";
+                strID[2] = "1970-1982";
+                strID[3] = "1986-1998";
+                strID[4] = "2002-2014";
+
+                var strYears = [];
+                strYears[0] = "1950";
+                strYears[1] = "1966";
+                strYears[2] = "1982";
+                strYears[3] = "1998";
+                strYears[4] = "2014";
+                items.clear();
+                for (var i = 0; i < 5; i++) {
+                    var intID = strID[i];
+                    var ct = strLinks[i].toString();
+                    var st = strYears[i].toString();
+                    items.add({ id: intID, content: ct, start: st });
+                }
+            }
+
+            
+            loadValues();
+
+            // Configuration for the Timeline
+            var options = {
+                // specify a template for the items
+                template: template
+            };
+
+            // Create a Timeline
+            var timeline = new vis.Timeline(container, items, options);
+
+            function reLoad() {
+                loadValues();
+                timeline.redraw();
+                timeline.repaint();
+            } 
+        </script>
+    </body>
+</html>

@@ -1,0 +1,452 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Top Fair Play Countries</title>
+        <script src='./threex/vendor/require.js/require.js'></script>
+        <!--<script src='./threex/vendor/three.js/build/three.min.js'></script>-->
+
+        <!--<script src="libs/three.min.js"></script>-->
+        <!--<script src="./libs/Detector.js"></script>
+        <script src="./libs/controls/OrbitControls.js"></script>
+        <script src="./libs/CanvasRenderer.js"></script>-->
+
+        <script src="./libs/three.min.js"></script>
+        <script src="./libs/Detector.js"></script>
+        <script src="./libs/controls/OrbitControls.js"></script>
+        <script src="./libs/CanvasRenderer.js"></script>
+
+
+    </head>
+
+    <body style='margin: 0px; background-color: #bbbbbb; overflow: hidden;'>
+        <h1>The 3 Top Fair Play awarded Countries</h1>
+        <script>
+            require(['./threex/package.require.js'
+                , './threex/bower_components/threex.grassground/package.require.js'
+                , './threex/bower_components/threex.sportballs/package.require.js'
+                , './threex/bower_components/threex.daynight/package.require.js'
+                , './threex/bower_components/threex.text/package.require.js'
+            ], function () {
+                var renderer = new THREE.WebGLRenderer({
+                    antialiasing: true
+                });
+
+                alert("Just Started");
+
+                renderer.shadowMapEnabled = true
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                document.body.appendChild(renderer.domElement);
+
+                var onRenderFcts = [];
+                var scene = new THREE.Scene();
+                var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 10000)
+                camera.position.z = 30
+
+                //////////////////////////////////////////////////////////////////////////////////
+                //		set 3 point lighting						//
+                //////////////////////////////////////////////////////////////////////////////////
+
+                ; (function () {
+                    // add a ambient light
+                    var light = new THREE.AmbientLight(0x020202)
+                    scene.add(light)
+                    // add a light front right
+                    var light = new THREE.DirectionalLight('white', 1)
+                    light.position.set(0.5, 0.5, 2).multiplyScalar(10)
+                    scene.add(light)
+                    light.castShadow = true
+                    light.shadowCameraNear = 0.01
+                    light.shadowCameraFar = 250
+                    light.shadowCameraFov = 45
+
+                    light.shadowCameraLeft = -20
+                    light.shadowCameraRight = 20
+                    light.shadowCameraTop = 30
+                    light.shadowCameraBottom = -30
+                    // light.shadowCameraVisible	= true
+
+                    light.shadowBias = 0.001
+                    light.shadowDarkness = 0.6
+
+                    light.shadowMapWidth = 2048
+                    light.shadowMapHeight = 2048
+
+                    // // add a light behind
+                    // var light	= new THREE.DirectionalLight('white', 0.75)
+                    // light.position.set(-0.5, -0.5, -2)
+                })()
+
+                //////////////////////////////////////////////////////////////////////////////////
+                //		oimo world							//
+                //////////////////////////////////////////////////////////////////////////////////
+
+                var world = new OIMO.World(1 / 360, 2, 8 * 6)
+                setInterval(function () {
+                    world.step()
+                }, 1000 / 60);
+
+                //////////////////////////////////////////////////////////////////////////////////
+                //		add the grass ground				//
+                //////////////////////////////////////////////////////////////////////////////////
+
+                ; (function () {
+                    // return
+                    var geometry = new THREE.BoxGeometry(300, 20, 200);
+                    var material = new THREEx.GrassGround({
+                        repeatX: 30,
+                        repeatY: 30,
+                    }).material
+                    // var material	= new THREE.MeshNormalMaterial()
+                    var mesh = new THREE.Mesh(geometry, material);
+                    mesh.receiveShadow = true
+                    mesh.position.y = -geometry.parameters.height / 2
+
+                    var stepBody = THREEx.Oimo.createBodyFromMesh(world, mesh, {
+                        move: false
+                    })
+                    scene.add(mesh)
+                })()
+
+
+                var teams = [];
+                var scores = [];
+                var fPlace = "";
+                var sPlace = "";
+                var tPlace = "";
+
+                function loadCSV(file) {
+                    alert(file);
+                    var request;
+                    if (window.XMLHttpRequest) {
+                        // IE7+, Firefox, Chrome, Opera, Safari
+                        request = new XMLHttpRequest();
+                    } else {
+                        // code for IE6, IE5
+                        request = new ActiveXObject('Microsoft.XMLHTTP');
+                    }
+                    // load
+                    request.open('GET', file, false);
+                    request.send();
+                    parseCSV(request.responseText);
+                }
+
+                function parseCSV(data) {
+                    //replace UNIX new lines
+                    data = data.replace(/\r\n/g, "\n");
+                    //replace MAC new lines
+                    data = data.replace(/\r/g, "\n");
+                    //split into rows
+                    var cRows = data.split("\n");
+                    var numRows = 3; //rows.length;
+
+
+                    for (var i = 1; i <= numRows; i++) { // < numRows; i++) {
+                        // this line helps to skip empty rows
+                        if (cRows[i]) {
+                            // our columns are separated by comma
+                            var column = cRows[i].split(",");
+                            //var color = rainBow(numRows - 1, i);
+                            teams[i - 1] = column[0].toString().replace(/["']/g, "");
+                            scores[i - 1] = parseInt(column[1].toString().replace(/["']/g, ""));
+
+                        }
+                    }
+
+                    fPlace = teams[0] + ": " + scores[0] + " times";
+                    sPlace = teams[1] + ": " + scores[1] + " times";
+                    tPlace = teams[2] + ": " + scores[2] + " times";
+                }
+
+                //
+
+                ; (function () {
+                    loadCSV("data/fair_play/top_fair_play_countries.csv");
+                })()
+
+
+
+                var heights = [0.0, 0.4, 0.8, 1.2, 1.6, 2.0, 2.4, 3.0, 3.6, 4.2, 4.8, 5.4, 5.5, 5.7, 5.9];
+                var scales = [1.4, 1.2, 1.0, 1.5, 1.7, 1.9, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 0.8, 0.7, 0.5];
+                var n = 12;
+
+                ; (function () {
+                    var mesh = THREEx.SportBalls.createFootball()
+                    scene.add(mesh)
+                    mesh.position.x = -11.5 //-6.5
+                    mesh.position.y = 6.6 //2.5
+                    //mesh.position.z = 40  y= -0.5
+                    mesh.scale.multiplyScalar(2)
+                    var meshT = new THREEx.Text(tPlace)
+                    meshT.scale.multiplyScalar(1 / 2)
+                    meshT.position.x = -11.5 //-6.5
+                    meshT.position.y = 0.2 //5.5
+                    meshT.position.z = 2
+                    scene.add(meshT)
+
+
+                    for (var i = 0; i < 3; i++) {
+                        // Create cylinder geometries, materials and meshes
+                        var cgeom = new THREE.CylinderGeometry(scales[i + 1], scales[i], heights[i + 1] - heights[i], n, 1, true)
+                        mat = new THREE.MeshBasicMaterial({ wireframe: false, color: 0x663300, side: THREE.DoubleSide })
+                        var mesh = new THREE.Mesh(cgeom, mat)
+                        mesh.translateY((heights[i + 1] + heights[i]) / 2.0)
+                        mesh.position.x = -11.5
+                        scene.add(mesh)
+                    }
+
+                    for (var i = 3; i < scales.length - 4; i++) {
+                        // Create cylinder geometries, materials and meshes 0xcd7f32 0x905923
+                        var cgeom3b = new THREE.CylinderGeometry(scales[i + 1], scales[i], heights[i + 1] - heights[i], n, 1, true);
+                        mat = new THREE.MeshBasicMaterial({
+                            wireframe: false, color: 0x905923, side: THREE.DoubleSide
+
+                        });
+                        var mesh = new THREE.Mesh(cgeom3b, mat);
+                        mesh.translateY((heights[i + 1] + heights[i]) / 2.0);
+                        mesh.position.x = -11.5
+                        scene.add(mesh);
+                    }
+
+                    for (var i = scales.length - 4; i < scales.length - 2; i++) {
+                        // Create cylinder geometries, materials and meshes
+                        var cgeom3c = new THREE.CylinderGeometry(scales[i + 1], scales[i], heights[i + 1] - heights[i], n, 1, true);
+                        mat = new THREE.MeshBasicMaterial({
+                            wireframe: false, color: 0x663300, side: THREE.DoubleSide
+
+                        });
+                        var mesh = new THREE.Mesh(cgeom3c, mat);
+                        mesh.translateY((heights[i + 1] + heights[i]) / 2.0);
+                        mesh.position.x = -11.5
+                        scene.add(mesh);
+                    }
+
+
+
+                    //onRenderFcts.push(function (delta, now) {
+                    //    mesh.rotation.x += 1.2 * delta;
+                    //    mesh.rotation.y += 2.4 * delta;
+                    //})
+                })()
+
+                ; (function () {
+                    var mesh = THREEx.SportBalls.createFootball()
+                    scene.add(mesh)
+                    mesh.position.x = -0.1
+                    mesh.position.y = 6.6 //2.5
+                    mesh.scale.multiplyScalar(2)
+                    var meshT = new THREEx.Text(fPlace)
+                    meshT.scale.multiplyScalar(1)
+                    meshT.position.x = -0
+                    meshT.position.y = 0.2 //5.5
+                    meshT.position.z = 2
+                    scene.add(meshT)
+
+
+                    for (var i = 0; i < 3; i++) {
+                        // Create cylinder geometries, materials and meshes
+                        var cgeom = new THREE.CylinderGeometry(scales[i + 1], scales[i], heights[i + 1] - heights[i], n, 1, true);
+                        mat = new THREE.MeshBasicMaterial({
+                            wireframe: false, color: 0x663300, side: THREE.DoubleSide
+
+                        });
+                        var mesh = new THREE.Mesh(cgeom, mat);
+                        mesh.translateY((heights[i + 1] + heights[i]) / 2.0);
+                        scene.add(mesh);
+                    }
+
+                    for (var i = 3; i < scales.length - 4; i++) {
+                        // Create cylinder geometries, materials and meshes 0xD4AF37   0xffd700
+                        var cgeom = new THREE.CylinderGeometry(scales[i + 1], scales[i], heights[i + 1] - heights[i], n, 1, true);
+                        mat = new THREE.MeshBasicMaterial({
+                            wireframe: false, color: 0xD4AF37, side: THREE.DoubleSide
+
+                        });
+                        var mesh = new THREE.Mesh(cgeom, mat);
+                        mesh.translateY((heights[i + 1] + heights[i]) / 2.0);
+                        scene.add(mesh);
+                    }
+
+                    for (var i = scales.length - 4; i < scales.length - 2; i++) {
+                        // Create cylinder geometries, materials and meshes
+                        var cgeom = new THREE.CylinderGeometry(scales[i + 1], scales[i], heights[i + 1] - heights[i], n, 1, true);
+                        mat = new THREE.MeshBasicMaterial({
+                            wireframe: false, color: 0x663300, side: THREE.DoubleSide
+
+                        });
+                        var mesh = new THREE.Mesh(cgeom, mat);
+                        mesh.translateY((heights[i + 1] + heights[i]) / 2.0);
+                        scene.add(mesh);
+                    }
+
+                    //onRenderFcts.push(function (delta, now) {
+                    //    mesh.rotation.x += -1.2 * delta;
+                    //    mesh.rotation.y += 2.1 * delta;
+                    //})
+                })()
+
+
+                ; (function () {
+                    var mesh = THREEx.SportBalls.createFootball()
+                    scene.add(mesh)
+                    mesh.position.x = +12.4 //6.5
+                    mesh.position.y = +6.6 //2.5
+                    mesh.scale.multiplyScalar(2)
+                    var meshT = new THREEx.Text(sPlace)
+                    meshT.scale.multiplyScalar(2 / 3)
+                    meshT.position.x = 12.5 //6.5
+                    meshT.position.y = 0.2 //5.5
+                    meshT.position.z = 2
+                    scene.add(meshT)
+
+
+                    for (var i = 0; i < 3; i++) {
+                        // Create cylinder geometries, materials and meshes
+                        var cgeom = new THREE.CylinderGeometry(scales[i + 1], scales[i], heights[i + 1] - heights[i], n, 1, true)
+                        mat = new THREE.MeshBasicMaterial({ wireframe: false, color: 0x663300, side: THREE.DoubleSide })
+                        var mesh = new THREE.Mesh(cgeom, mat)
+                        mesh.translateY((heights[i + 1] + heights[i]) / 2.0)
+                        mesh.position.x = 12.5
+                        scene.add(mesh)
+                    }
+
+                    for (var i = 3; i < scales.length - 4; i++) {
+                        // Create cylinder geometries, materials and meshes 0xd3d3d3   0xC0C0C0
+                        var cgeom3b = new THREE.CylinderGeometry(scales[i + 1], scales[i], heights[i + 1] - heights[i], n, 1, true);
+                        mat = new THREE.MeshBasicMaterial({
+                            wireframe: false, color: 0xC0C0C0, side: THREE.DoubleSide
+
+                        });
+                        var mesh = new THREE.Mesh(cgeom3b, mat);
+                        mesh.translateY((heights[i + 1] + heights[i]) / 2.0);
+                        mesh.position.x = 12.5
+                        scene.add(mesh);
+                    }
+
+                    for (var i = scales.length - 4; i < scales.length - 2; i++) {
+                        // Create cylinder geometries, materials and meshes
+                        var cgeom3c = new THREE.CylinderGeometry(scales[i + 1], scales[i], heights[i + 1] - heights[i], n, 1, true);
+                        mat = new THREE.MeshBasicMaterial({
+                            wireframe: false, color: 0x663300, side: THREE.DoubleSide
+
+                        });
+                        var mesh = new THREE.Mesh(cgeom3c, mat);
+                        mesh.translateY((heights[i + 1] + heights[i]) / 2.0);
+                        mesh.position.x = 12.5
+                        scene.add(mesh);
+                    }
+
+
+                    //onRenderFcts.push(function (delta, now) {
+                    //    mesh.rotation.x += -1.2 * delta;
+                    //    mesh.rotation.y += 2.1 * delta;
+                    //})
+                })()
+
+
+                //////////////////////////////////////////////////////////////////////////////////
+                //		comment								//
+                //////////////////////////////////////////////////////////////////////////////////
+
+
+                var iomoStats = new THREEx.Oimo.Stats(world)
+                //document.body.appendChild(iomoStats.domElement)
+                onRenderFcts.push(function (delta) {
+                    iomoStats.update()
+                })
+
+                //////////////////////////////////////////////////////////////////////////////////
+                //		Camera Controls							//
+                //////////////////////////////////////////////////////////////////////////////////
+                var mouse = { x: 0, y: 0 }
+                document.addEventListener('mousemove', function (event) {
+                    mouse.x = (event.clientX / window.innerWidth) - 0.5
+                    mouse.y = (event.clientY / window.innerHeight) - 0.5
+                }, false)
+                onRenderFcts.push(function (delta, now) {
+                    camera.position.x += (mouse.x * 10 - camera.position.x - 10) * (delta * 3)
+                    camera.position.y += (mouse.y * 5 - (camera.position.y - 5)) * (delta * 3)
+                    camera.lookAt(new THREE.Vector3(0, 5, 0))
+                })
+
+                //////////////////////////////////////////////////////////////////////////////////
+                //		comment								//
+                //////////////////////////////////////////////////////////////////////////////////
+
+                var sunAngle = -2 / 6 * Math.PI * 2;
+                // var sunAngle = -3/6*Math.PI*2;
+                onRenderFcts.push(function (delta, now) {
+                    var dayDuration = 40	// nb seconds for a full day cycle
+                    sunAngle += delta / dayDuration * Math.PI * 2
+                })
+
+                //////////////////////////////////////////////////////////////////////////////////
+                //		starfield							//
+                //////////////////////////////////////////////////////////////////////////////////
+
+                var starField = new THREEx.DayNight.StarField()
+                scene.add(starField.object3d)
+                onRenderFcts.push(function (delta, now) {
+                    starField.update(sunAngle)
+                })
+
+                //////////////////////////////////////////////////////////////////////////////////
+                //		sunSphere							//
+                //////////////////////////////////////////////////////////////////////////////////
+
+                var sunSphere = new THREEx.DayNight.SunSphere()
+                scene.add(sunSphere.object3d)
+                onRenderFcts.push(function (delta, now) {
+                    sunSphere.update(sunAngle)
+                })
+
+                //////////////////////////////////////////////////////////////////////////////////
+                //		directionalLight						//
+                //////////////////////////////////////////////////////////////////////////////////
+
+
+                var sunLight = new THREEx.DayNight.SunLight()
+                scene.add(sunLight.object3d)
+                onRenderFcts.push(function (delta, now) {
+                    sunLight.update(sunAngle)
+                })
+
+                //////////////////////////////////////////////////////////////////////////////////
+                //		skydom								//
+                //////////////////////////////////////////////////////////////////////////////////
+
+                var skydom = new THREEx.DayNight.Skydom()
+                scene.add(skydom.object3d)
+                onRenderFcts.push(function (delta, now) {
+                    skydom.update(sunAngle)
+                })
+
+
+                //////////////////////////////////////////////////////////////////////////////////
+                //		render the scene						//
+                //////////////////////////////////////////////////////////////////////////////////
+                onRenderFcts.push(function () {
+                    renderer.render(scene, camera);
+                })
+
+                //////////////////////////////////////////////////////////////////////////////////
+                //		loop runner							//
+                //////////////////////////////////////////////////////////////////////////////////
+                var lastTimeMsec = null
+                requestAnimationFrame(function animate(nowMsec) {
+                    // keep looping
+                    requestAnimationFrame(animate);
+                    // measure time
+                    lastTimeMsec = lastTimeMsec || nowMsec - 1000 / 60
+                    var deltaMsec = Math.min(200, nowMsec - lastTimeMsec)
+                    lastTimeMsec = nowMsec
+                    // call each update function
+                    onRenderFcts.forEach(function (onRenderFct) {
+                        onRenderFct(deltaMsec / 1000, nowMsec / 1000)
+                    })
+                })
+
+            })
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>FIFA Top Ten Ranked Teams Goals Score per Tournament</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="./threegraph/css/reset.css">
+        <link rel="stylesheet" href="./threegraph/css/jquery.tablesheet.css">
+        <link rel="stylesheet" href="./threegraph/css/jquery-ui.css">
+        <link rel="stylesheet" href="./threegraph/css/jquery.colorpicker.css">
+        <link rel="stylesheet" href="./threegraph/css/scenes.css">
+    </head>  
+
+    <body>
+        <form id="year-range" name="year-range" action=""></form>
+
+        <script type="text/javascript">
+
+            var qs = getQueryStrings();
+            var myRange = qs["myRange"];
+
+            // Grabing the year from the calling page
+            var qs = getQueryStrings();
+            var myYear = qs["myRange"];
+
+            var yearRange = [];
+            yearRange = myYear.split("-");
+            var start = yearRange[0];
+            var end = yearRange[1];
+
+            var start_input = document.createElement("input");
+            start_input.setAttribute("type", "hidden");
+            start_input.setAttribute("name", "start-date");
+            start_input.setAttribute("id", "start-date");
+            start_input.setAttribute("value", start);
+            document.getElementById("year-range").appendChild(start_input);
+
+            var end_input = document.createElement("input");
+            end_input.setAttribute("type", "hidden");
+            end_input.setAttribute("name", "end-date");
+            end_input.setAttribute("id", "end-date");
+            end_input.setAttribute("value", end);
+            document.getElementById("year-range").appendChild(end_input);
+
+            function getQueryStrings() {
+                var assoc = {};
+                var decode = function (s) { return decodeURIComponent(s.replace(/\+/g, " ")); };
+                var queryString = location.search.substring(1);
+                var keyValues = queryString.split('&');
+
+                for (var i in keyValues) {
+                    var key = keyValues[i].split('=');
+                    if (key.length > 1) {
+                        assoc[decode(key[0])] = decode(key[1]);
+                    }
+                }
+
+                return assoc;
+            }
+
+        </script>
+
+
+
+        <div id="div-controls-pie">
+            <img src="./threegraph/img/soccerball.jpg">
+        </div>
+
+        <div id="valuelabel"></div>
+
+        <div id="div-legend">
+            <h4>FIFA Top Ten Ranked Teams Goals Score per Tournament</h4>
+        </div>
+
+        <script type="text/javascript">
+            chartType = "bar";
+            loadType = "data";
+            chartTitle = "Bar Chart";
+        </script>
+
+        <script type="text/javascript" src="./threegraph/js/settings.js"></script>
+        <script type="text/javascript" src="./threegraph/js/data/bardata/toptengoals.js"></script>
+        <script type="text/javascript" src="./threegraph/js/libs/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="./threegraph/js/plugins/jquery-ui.js"></script>
+        <script type="text/javascript" src="./threegraph/js/plugins/jquery.jeditable.mini.js"></script>
+        <script type="text/javascript" src="./threegraph/js/plugins/jquery.colorpicker.js"></script>
+        <script type="text/javascript" src="./threegraph/js/plugins/jquery.tablesheet.js"></script>
+        <script type="text/javascript" src="./threegraph/js/libs/three.min.js"></script>
+        <script type="text/javascript" src="./threegraph/js/classes/TrackballControls.js"></script>
+        <script type="text/javascript" src="./threegraph/js/classes/TrackballControlsTouch.js"></script>
+        <script type="text/javascript" src="./threegraph/js/utils.js"></script>
+        <script type="text/javascript" src="./threegraph/js/classes/NiceScale.js"></script>
+        <script type="text/javascript" src="./threegraph/js/classes/BarCubes.js"></script>
+        <script type="text/javascript" src="./threegraph/js/classes/ScaleTexts.js"></script>
+        <script type="text/javascript" src="./threegraph/fonts/helvetiker_bold.typeface.js"></script>
+        <script type="text/javascript" src="./threegraph/js/scenes/scene_bar.js"></script>
+        <script type="text/javascript">replaceImage = "files/1356279434.png"</script>
+        <script type="text/javascript" src="./threegraph/js/init.js"></script>
+    </body>
+</html>

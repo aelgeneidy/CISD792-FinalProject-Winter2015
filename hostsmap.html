@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>World Cup Hosts</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="./threegraph/css/reset.css">
+        <link rel="stylesheet" href="./threegraph/css/jquery.tablesheet.css">
+        <link rel="stylesheet" href="./threegraph/css/jquery-ui.css">
+        <link rel="stylesheet" href="./threegraph/css/jquery.colorpicker.css">
+        <link rel="stylesheet" href="./threegraph/css/scenes.css">
+    </head>
+    <body>
+        <div id="div-controls-pie">
+            <!--<p>World Cup Champions</p>-->
+            <img src="./threegraph/img/trophycountries.png">
+            <!--<img src="./threegraph/img/trophy1.png">World Cup Champions-->
+            <!--<div class="separator_big_h"></div>
+            <ul>
+                <li>
+                    <a href="#" title="export bar chart" id="link-export">
+                        <img src="./threegraph/img/icon_export.png" alt="Export"> Export2
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="edit bar chart" id="link-edit">
+                        <img src="./threegraph/img/icon_settings.png" alt="Edit"> Edit2
+                    </a>
+                </li>
+            </ul>-->
+        </div>
+
+        <div id="valuelabel"></div>
+
+        <div id="div-legend">
+            <h4>World Cup Hosts</h4>
+
+        </div>
+
+
+        <!--<div id="div-databox">
+            <h3>Edit Settings</h3>
+            <h4>General Settings</h4>
+            <div class="left col1-4 small-text">
+                Title: <input type="text" id="charttitle" size="12">
+            </div>
+            <div class="left col1-4 small-text">
+                Background color:
+                <input id="colorpick_bc" type="text" size="4" value="000000" />
+            </div>
+            <div class="left col1-4 small-text">
+                Value text color:
+                <input id="colorpick_vt" type="text" size="4" value="ffffff" />
+            </div>
+            <div class="left col1-4 small-text">
+            </div>
+            <div class="clear"></div>
+            <div class="small-text">
+                Globe focus:
+                <select id="country_focus" name="country_focus">
+                    <option selected="selected" value="Lebanon">Lebanon</option>
+                </select>
+            </div>
+            <h4>Chart Data</h4>
+            <table id="datatable" class="jqueryTableSheet"></table>
+        </div>-->
+
+
+        <!--<div id="div-exportbox">
+            <h3>Export chart</h3>
+            <div class="separator_hid10"></div>
+            <div id="link-export-image" class="general-button general-button-b element-centered">
+                Export as image
+            </div>
+            <div id="result-export-image" class="div-results"></div>
+            <div class="separator_hid10"></div>
+            <div id="link-export-embed" class="general-button general-button-b element-centered">
+                Export for the web
+            </div>
+            <div id="result-export-embed" class="div-results"></div>
+            <div class="separator_hid30"></div>
+            <div class="separator_big_h"></div>
+            <div class="separator_hid10"></div>
+            <div id="link-export-close" class="general-button general-button-b element-centered">
+                Cancel
+            </div>
+        </div>-->
+
+
+
+        <script type="text/javascript">
+            chartType = "world";
+            loadType = "data";
+        </script>
+
+        <script type="text/javascript" src="./threegraph/js/settings.js"></script>
+        <script type="text/javascript">
+            staticUrl = "./threegraph/";
+            chartTitle = "World Cup Champions"
+        </script>
+
+        <script type="text/javascript" src="./threegraph/js/data/worlddata/countries.js"></script>
+        <script type="text/javascript" src="./threegraph/js/data/worlddata/hosts.js"></script>
+
+        <script type="text/javascript" src="./threegraph/js/libs/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="./threegraph/js/plugins/jquery-ui.js"></script>
+        <script type="text/javascript" src="./threegraph/js/plugins/jquery.jeditable.mini.js"></script>
+        <script type="text/javascript" src="./threegraph/js/plugins/jquery.colorpicker.js"></script>
+        <script type="text/javascript" src="./threegraph/js/plugins/jquery.tablesheet.js"></script>
+
+        <script type="text/javascript" src="./threegraph/js/libs/three.js"></script>
+
+        <script type="text/javascript" src="./threegraph/js/classes/TrackballControls.js"></script>
+        <script type="text/javascript" src="./threegraph/js/classes/TrackballControlsTouch.js"></script>
+        <script type="text/javascript" src="./threegraph/js/utils.js"></script>
+
+        <script type="text/javascript" src="./threegraph/js/classes/NiceScale.js"></script>
+
+        <script type="text/javascript" src="./threegraph/js/classes/BarCubes.js"></script>
+
+        <script type="text/javascript" src="./threegraph/js/classes/ScaleTexts.js"></script>
+
+        <script type="text/javascript" src="./threegraph/fonts/helvetiker_bold.typeface.js"></script>
+        <script type="text/javascript" src="./threegraph/js/scenes/scene_world.js"></script>
+        <script type="text/javascript">
+
+            backColor = '000000'; scaleTextColor = 'eeeeee'; valTextColor = "ffffff"; valHeight = 400; countryFocus = "Lebanon"
+
+        </script>
+        <script type="text/javascript" src="./threegraph/js/init.js"></script>
+    </body>
+</html>
+

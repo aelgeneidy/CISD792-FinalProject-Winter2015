@@ -1,0 +1,83 @@
+country,CountryCode,numOfParticipations,gamesPlayed,wins,ties,losses,GF,GA,points
+Algeria,ALG,4,13,3,4,6,14,19,13
+Angola,ANG,1,3,0,2,1,1,2,2
+Argentina,ARG,16,77,39,13,25,134,90,220
+Australia,AUS,4,13,2,3,8,11,26,9
+Austria,AUT,7,29,11,5,13,44,49,53
+Belgium,BEL,12,41,13,11,17,61,73,56
+Bolivia,BOL,3,6,0,1,5,1,20,1
+Bosnia and Herzegovina,BIH,1,3,1,0,2,4,4,3
+Brazil,BRA,20,104,68,14,22,222,114,382
+Bulgaria,BUL,7,26,3,7,16,22,53,22
+Cameroon,CMR,7,23,3,9,11,21,46,18
+Canada,CAN,1,3,0,0,3,0,5,0
+Chile,CHI,9,33,11,6,16,40,49,50
+China PR,CHN,1,3,0,0,3,0,9,0
+Colombia,COL,5,18,7,3,8,27,27,24
+Costa Rica,CRC,4,15,5,2,8,17,23,19
+Croatia,CRO,4,16,7,2,7,21,17,33
+Cuba,CUB,1,3,1,1,1,7,14,4
+Czech Republic,CZE,1,3,1,0,2,3,4,3
+Czechoslovakia,TCH,8,30,10,8,12,49,51,68
+Denmark,DEN,4,16,8,2,6,27,24,26
+Dutch East Indies,DEI,1,1,0,0,1,0,6,0
+Ecuador,ECU,3,10,4,1,5,10,11,13
+Egypt,EGY,2,4,0,2,2,3,6,2
+El Salvador,SLV,2,6,0,0,6,1,22,0
+England,ENG,14,62,23,21,18,89,69,118
+France,FRA,14,59,27,11,21,109,74,156
+German DR,GDR,1,6,2,2,2,5,5,8
+Germany,GER,8,44,28,8,8,94,45,158
+Germany FR,FRG,10,62,35,14,13,137,81,242
+Ghana,GHA,3,12,3,3,6,13,17,13
+Greece,GRE,3,10,2,1,7,5,20,8
+Haiti,HAI,1,3,0,0,3,2,14,0
+Honduras,HON,3,9,0,3,6,3,14,3
+Hungary,HUN,9,32,14,4,14,89,61,76
+Iran,IRN,4,12,1,3,8,7,22,6
+Iraq,IRQ,1,3,0,0,3,1,4,0
+Israel,ISR,1,3,0,2,1,1,3,2
+Italy,ITA,18,83,40,23,20,132,86,272
+Ivory Coast,CIV,3,9,3,1,5,13,14,10
+Jamaica,JAM,1,3,1,0,2,3,9,3
+Japan,JPN,5,17,4,3,10,14,22,16
+Kuwait,KUW,1,3,0,1,2,2,6,1
+Mexico,MEX,15,53,15,13,25,64,88,60
+Morocco,MAR,4,13,2,4,7,12,18,10
+Netherlands,NED,10,50,27,12,11,92,48,156
+New Zealand,NZL,2,6,0,3,3,4,14,3
+Nigeria,NGA,5,18,5,4,9,21,26,19
+North Korea,PRK,2,7,1,1,5,6,21,4
+Northern Ireland,NIR,3,13,2,6,5,14,25,12
+Norway,NOR,3,8,2,4,2,9,9,10
+Paraguay,PAR,8,27,7,10,10,31,38,32
+Peru,PER,4,15,4,3,8,19,31,15
+Poland,POL,7,31,15,6,10,49,44,71
+Portugal,POR,6,26,13,3,10,43,29,58
+Republic of Ireland,IRL,3,13,2,6,5,10,10,14
+Romania,ROU,7,21,8,3,10,31,33,29
+Russia,RUS,3,9,2,2,5,13,13,8
+Saudi Arabia,KSA,4,13,2,2,9,9,32,8
+Scotland,SCO,8,23,4,7,12,25,41,19
+Senegal,SEN,1,5,1,4,0,7,6,7
+Serbia,SRB,1,3,1,0,2,2,3,3
+Serbia and Montenegro,SCG,1,3,0,0,3,2,10,0
+Slovakia,SVK,1,4,1,1,2,5,7,4
+Slovenia,SVN,2,6,1,1,4,5,10,4
+South Africa,RSA,3,9,2,4,3,11,16,10
+South Korea,KOR,9,31,4,9,18,32,69,27
+Soviet Union,URS,7,31,15,8,8,56,35,58
+Spain,ESP,14,59,28,11,20,93,67,123
+Sweden,SWE,11,46,16,13,17,74,68,102
+Switzerland,SUI,10,33,11,6,16,47,60,40
+Togo,TOG,1,3,0,0,3,1,6,0
+Trinidad and Tobago,TRI,1,3,0,1,2,0,4,1
+Tunisia,TUN,4,12,1,4,7,8,17,7
+Turkey,TUR,2,10,4,2,4,19,17,24
+Ukraine,UKR,1,5,2,0,3,5,7,7
+United Arab Emirates,UAE,1,3,0,0,3,2,11,0
+United States,USA,10,33,8,7,18,38,62,41
+Uruguay,URU,12,51,19,13,19,84,74,126
+Wales,WAL,1,5,1,3,1,4,4,6
+Yugoslavia,YUG,9,37,14,8,15,60,49,61
+Zaire,ZAI,1,3,0,0,3,0,14,0

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		
+		<title>World Cup Teams - Goals</title>
+		
+		<style>
+			html, body {
+				height: 100%;
+			}
+
+			body {
+				background-color: #000000;
+				margin: 0;
+				font-family: Helvetica, sans-serif;;
+				overflow: hidden;
+			}
+
+			a {
+				color: #ffffff;
+			}
+
+			#info {
+				position: absolute;
+				width: 100%;
+				color: #ffffff;
+				padding: 5px;
+				font-family: Monospace;
+				font-size: 13px;
+				font-weight: bold;
+				text-align: center;
+				z-index: 1;
+			}
+
+			#menu {
+				position: absolute;
+				bottom: 20px;
+				width: 100%;
+				text-align: center;
+				visibility: hidden;
+			}
+
+			.element {
+				width: 135px;
+				height: 165px;
+				box-shadow: 0px 0px 12px rgba(0,255,255,0.5);
+				border: 1px solid rgba(127,255,255,0.25);
+				text-align: center;
+				cursor: default;
+			}
+
+			.element:hover {
+				box-shadow: 0px 0px 12px rgba(0,255,255,0.75);
+				border: 1px solid rgba(127,255,255,0.75);
+			}
+
+			.element .number {
+				position: absolute;
+				top: 20px;
+				right: 20px;
+				font-size: 12px;
+				color: rgba(127,255,255,0.75);
+			}
+
+			.element .symbol {
+				position: absolute;
+				top: 40px;
+				left: 0px;
+				right: 0px;
+				font-size: 56px;
+				font-weight: bold;
+				color: rgba(255,255,255,0.75);
+				text-shadow: 0 0 10px rgba(0,255,255,0.95);
+			}
+
+			.element .details {
+				position: absolute;
+				bottom: 15px;
+				left: 0px;
+				right: 0px;
+				font-size: 14px;
+				color: rgba(127,255,255,0.75);
+			}
+
+			button {
+				/* color: rgba(127,255,255,0.75); */
+				color: rgba(30,144,255,0.75);
+				background: transparent;
+				/* outline: 1px solid rgba(127,255,255,0.75); */
+				outline: 1px solid rgba(30,144,255,0.75);
+				border: 0px;
+				padding: 5px 10px;
+				cursor: pointer;
+			}
+			
+			button:hover {
+				background-color: rgba(0,60,255,0.5);
+			}
+			
+			button:active {
+				color: #000000;
+				background-color: rgba(0,60,255,0.75);
+			}
+			
+			#pg-header {
+				font-weight: bold;
+				text-align: center;
+				color: #ff0000;
+				margin: 40px 0px;
+				font-size: 36px;
+			}
+			
+			#pg-sub-header {
+				font-weight: bold;
+				text-align: center;
+				color: #00ff00;
+				font-size: 22px;
+			}
+			
+		</style>
+	</head>
+	
+	<body>
+    
+		<script src="libs/three.min.js"></script>
+		<script src="libs/tween.min.js"></script>
+		<script src="libs/TrackballControls.js"></script>
+		<script src="libs/CSS3DRenderer.js"></script>
+		<script src="libs/jquery-1.11.1.js"></script>
+		
+		<div id="container"></div>
+		
+		<div id="pg-header">World Cup Teams<br><span id="pg-sub-header">(Goals)</span></div>
+		
+		<div id="menu">
+			<button id="helix">GOALS</button>
+		</div>
+				
+		<script>
+
+			var table = [];
+      
+			var camera, scene, renderer;
+			var controls;
+
+			var objects = [];
+			
+			var targets = { table: [], sphere: [], helix: [], grid: [] };
+			
+			loadCSVDoc();
+			setTimeout(init, 1000);
+			animate();
+			
+			function init() {
+
+				camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+				camera.position.z = 3000;
+
+				scene = new THREE.Scene();
+
+				// table
+
+				var x = 1;
+				var y = 1;
+				
+				for ( var i = 0; i < table.length; i += 10 ) {
+
+					var element = document.createElement( 'div' );
+					
+					var gfStr = (parseInt(table[i+7]) == 1)?"goal":"goals"; 
+					var gaStr = (parseInt(table[i+8]) == 1)?"goal":"goals"; 
+					var tooltipStr = table[i+1] + " has " + parseInt(table[i+7]) + " " + gfStr + " for, and " + parseInt(table[i+8]) + " " + gaStr + " against.";
+					element.title = tooltipStr;
+					element.className = 'element';					
+					//element.style.backgroundColor = 'rgba(0,60,127,' + ( Math.random() * 0.5 + 0.25 ) + ')';
+					element.style.backgroundColor = 'rgba(127,10,20,' + ( Math.random() * 0.5 + 0.25 ) + ')';
+
+					var symbol = document.createElement( 'div' );
+					symbol.className = 'symbol';					
+					symbol.textContent = table[ i ];
+					element.appendChild( symbol );
+
+					var details = document.createElement( 'div' );
+					details.className = 'details';
+					details.innerHTML = table[ i + 1 ] + '<br>' + table[ i + 7 ] + '&#32;' + table[ i + 8 ];
+					element.appendChild( details );
+					
+					var object = new THREE.CSS3DObject( element );
+					object.position.x = Math.random() * 4000 - 2000;
+					object.position.y = Math.random() * 4000 - 2000;
+					object.position.z = Math.random() * 4000 - 2000;
+					scene.add( object );
+
+					objects.push( object );
+
+					var object = new THREE.Object3D();
+					object.position.x = ( x * 140 ) - 1330;
+					object.position.y = - ( y * 180 ) + 990;
+
+					targets.table.push( object );
+					
+					x += 1;
+					if (x > 18) {
+						x = 1;
+						y += 1;
+					}
+					
+				}
+				
+				// sphere
+
+				var vector = new THREE.Vector3();
+
+				for ( var i = 0, l = objects.length; i < l; i ++ ) {
+				
+					var phi = Math.acos( -1 + ( 2 * i ) / l );
+					var theta = Math.sqrt( l * Math.PI ) * phi;
+
+					var object = new THREE.Object3D();
+
+					object.position.x = 800 * Math.cos( theta ) * Math.sin( phi );
+					object.position.y = 800 * Math.sin( theta ) * Math.sin( phi );
+					object.position.z = 800 * Math.cos( phi );
+					
+					vector.copy( object.position ).multiplyScalar( 2 );
+					
+					object.lookAt( vector );
+					
+					targets.sphere.push( object );
+					
+				}
+
+				// helix
+
+				var vector = new THREE.Vector3();
+
+				for ( var i = 0, l = objects.length; i < l; i ++ ) {
+
+					var phi = i * 0.175 + Math.PI;
+
+					var object = new THREE.Object3D();
+
+					object.position.x = 900 * Math.sin( phi );
+					object.position.y = - ( i * 8 ) + 450;
+					object.position.z = 900 * Math.cos( phi );
+
+					vector.x = object.position.x * 2;
+					vector.y = object.position.y;
+					vector.z = object.position.z * 2;
+
+					object.lookAt( vector );
+
+					targets.helix.push( object );
+
+				}
+
+				// grid
+
+				for ( var i = 0; i < objects.length; i ++ ) {
+
+					var object = new THREE.Object3D();
+
+					object.position.x = ( ( i % 5 ) * 400 ) - 800;
+					object.position.y = ( - ( Math.floor( i / 5 ) % 5 ) * 400 ) + 800;
+					object.position.z = ( Math.floor( i / 25 ) ) * 1000 - 2000;
+
+					targets.grid.push( object );
+
+				}
+				
+				renderer = new THREE.CSS3DRenderer();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.domElement.style.position = 'absolute';
+				document.getElementById( 'container' ).appendChild( renderer.domElement );
+
+				controls = new THREE.TrackballControls( camera, renderer.domElement );
+				controls.rotateSpeed = 0.5;
+				controls.minDistance = 500;
+				controls.maxDistance = 6000;
+				controls.addEventListener( 'change', render );
+				
+				
+				var button = document.getElementById( 'helix' );
+				button.addEventListener( 'click', function ( event ) {
+
+					transform( targets.helix, 2000 );
+
+				}, false );
+				
+				transform( targets.table, 2000 );
+
+				window.addEventListener( 'resize', onWindowResize, false );
+				
+				$("#helix").click();
+				
+			}
+
+			function transform( targets, duration ) {
+
+				TWEEN.removeAll();
+
+				for ( var i = 0; i < objects.length; i ++ ) {
+
+					var object = objects[ i ];
+					var target = targets[ i ];
+
+					new TWEEN.Tween( object.position )
+						.to( { x: target.position.x, y: target.position.y, z: target.position.z }, Math.random() * duration + duration )
+						.easing( TWEEN.Easing.Exponential.InOut )
+						.start();
+
+					new TWEEN.Tween( object.rotation )
+						.to( { x: target.rotation.x, y: target.rotation.y, z: target.rotation.z }, Math.random() * duration + duration )
+						.easing( TWEEN.Easing.Exponential.InOut )
+						.start();
+
+				}
+
+				new TWEEN.Tween( this )
+					.to( {}, duration * 2 )
+					.onUpdate( render )
+					.start();
+
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+				render();
+
+			}
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+
+				TWEEN.update();
+
+				controls.update();
+
+			}
+
+			function render() {
+
+				renderer.render( scene, camera );
+
+			}
+			
+			function loadCSVDoc() {
+				var xmlhttp;
+
+				if (window.XMLHttpRequest) {
+				  // code for IE7+, Firefox, Chrome, Opera, Safari
+				  xmlhttp = new XMLHttpRequest();
+				}
+				else {
+				  // code for IE6, IE5
+				  xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+
+				xmlhttp.onreadystatechange = function() {
+				  
+				  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					parseCSV(xmlhttp.responseText);
+				  }
+				}
+        
+				xmlhttp.open("GET","data/team_performance/team_performance.csv",true);
+				xmlhttp.send();
+        
+				// setTimeout(draw, 500); 
+   
+			}
+      
+			function parseCSV(allText) {
+				var country = [];
+				var countryCode = [];
+				var numOfParticipations = [];
+				var gamesPlayed = [];
+				var wins = [];
+				var ties = [];
+				var losses = [];
+				var GF = [];
+				var GA = [];
+				var points = [];
+				
+				var allTextLines = [];
+				allTextLines = allText.split(/\r\n|\n/);
+					
+				// Create the header array
+				var fldHeading = [];
+				fldHeading = allTextLines[0].split(',');
+					
+				// Create the array of data
+				var fldData = [];
+				for (var i = 1; i < allTextLines.length; i++) {
+				  fldData[i-1] = allTextLines[i].split(',');
+				}
+					
+				for (var i = 0; i < fldData.length - 1; i++) {
+				  country[i] = fldData[i][0];
+				  countryCode[i] = fldData[i][1]
+				  numOfParticipations[i] = fldData[i][2];
+				  gamesPlayed[i] = fldData[i][3];
+				  wins[i] = fldData[i][4];
+				  ties[i] = fldData[i][5];
+				  losses[i] = fldData[i][6];
+				  GF[i] = fldData[i][7];
+				  GA[i] = fldData[i][8];
+				  points[i] = fldData[i][9];
+				}
+				
+				// Construct the table
+				j = 0
+				for (var i = 0; i < country.length - 1; i++) {
+					table[j] = countryCode[i];
+					table[j+1] = country[i];
+					table[j+2] = parseInt(numOfParticipations[i]);
+					table[j+3] = parseInt(gamesPlayed[i]);
+					table[j+4] = parseInt(wins[i]);
+					table[j+5] = parseInt(ties[i]);
+					table[j+6] = parseInt(losses[i]);
+					table[j+7] = parseInt(GF[i]);
+					table[j+8] = parseInt(GA[i]);
+					table[j+9] = parseInt(points[i]);
+					j += 10;  
+				}
+			
+			}
+
+		</script>
+	</body>
+</html>

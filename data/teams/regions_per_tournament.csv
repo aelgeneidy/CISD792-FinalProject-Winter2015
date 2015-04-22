@@ -1,0 +1,91 @@
+year,regionCode,regionName,numOfRegions
+1930,EU,Europe,4
+1930,NA,North and Central America,2
+1930,SA,South America,7
+1934,AF,Africa,1
+1934,EU,Europe,12
+1934,NA,North and Central America,1
+1934,SA,South America,2
+1938,AS,Asia,1
+1938,EU,Europe,12
+1938,NA,North and Central America,1
+1938,SA,South America,1
+1950,EU,Europe,6
+1950,NA,North and Central America,2
+1950,SA,South America,5
+1954,AS,Asia,1
+1954,EU,Europe,12
+1954,NA,North and Central America,1
+1954,SA,South America,2
+1958,EU,Europe,12
+1958,NA,North and Central America,1
+1958,SA,South America,3
+1962,EU,Europe,10
+1962,NA,North and Central America,1
+1962,SA,South America,5
+1966,AS,Asia,1
+1966,EU,Europe,10
+1966,NA,North and Central America,1
+1966,SA,South America,4
+1970,AF,Africa,1
+1970,EU,Europe,10
+1970,NA,North and Central America,2
+1970,SA,South America,3
+1974,AF,Africa,1
+1974,AS,Asia,1
+1974,EU,Europe,9
+1974,NA,North and Central America,1
+1974,SA,South America,4
+1978,AF,Africa,1
+1978,AS,Asia,1
+1978,EU,Europe,10
+1978,NA,North and Central America,1
+1978,SA,South America,3
+1982,AF,Africa,2
+1982,AS,Asia,1
+1982,EU,Europe,14
+1982,NA,North and Central America,2
+1982,OC,Oceania,1
+1982,SA,South America,4
+1986,AF,Africa,2
+1986,AS,Asia,2
+1986,EU,Europe,14
+1986,NA,North and Central America,2
+1986,SA,South America,4
+1990,AF,Africa,2
+1990,AS,Asia,2
+1990,EU,Europe,14
+1990,NA,North and Central America,2
+1990,SA,South America,4
+1994,AF,Africa,3
+1994,AS,Asia,2
+1994,EU,Europe,13
+1994,NA,North and Central America,2
+1994,SA,South America,4
+1998,AF,Africa,5
+1998,AS,Asia,4
+1998,EU,Europe,15
+1998,NA,North and Central America,3
+1998,SA,South America,5
+2002,AF,Africa,5
+2002,AS,Asia,4
+2002,EU,Europe,15
+2002,NA,North and Central America,3
+2002,SA,South America,5
+2006,AF,Africa,5
+2006,AS,Asia,4
+2006,EU,Europe,14
+2006,NA,North and Central America,4
+2006,OC,Oceania,1
+2006,SA,South America,4
+2010,AF,Africa,6
+2010,AS,Asia,4
+2010,EU,Europe,13
+2010,NA,North and Central America,3
+2010,OC,Oceania,1
+2010,SA,South America,5
+2014,AF,Africa,5
+2014,AS,Asia,4
+2014,EU,Europe,13
+2014,NA,North and Central America,4
+2014,SA,South America,6

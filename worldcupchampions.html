@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>World Cup Champions</title>
+        <!-- load handlebars for templating, and create a template -->
+        <script src="./vis/handlebars-v3.0.0.js"></script>
+        <script src="./vis/vis.js"></script>
+        <link href="./vis/vis.css" rel="stylesheet" type="text/css" />
+
+        <script id="item-template" type="text/x-handlebars-template">
+            <table class="score">
+                <tr>
+                    <td class="description">{{year}}</td>
+                </tr>
+                <tr>
+                    <td>{{champion}}</td>
+                </tr>
+                <tr>
+                    <td><img src="./flags/{{winner}}.png" width="31" height="20" alt="{{winner}}"></td>
+                </tr>
+            </table>
+        </script>
+
+        <style type="text/css">
+            body, html {
+                font-family: sans-serif;
+                font-size: 10pt;
+                background-color: lightblue;
+            }
+
+            h1 {
+                color: #011f4b;
+            }
+
+            p {
+                color: darkgreen;
+            }
+            /*Outside Border and timeline box*/
+            .vis.timeline.root {
+                border: 2px solid red; /*purple*/
+                font-family: purisa, 'comic sans', cursive;
+                font-size: 12pt;
+                background: #011f4b; /*#ffecea*/
+            }
+
+            /*Color fill Inside item box*/
+            .vis.timeline .item {
+                border-color: #005b96; /*#F991A3*/
+                background-color: lightblue; /*pink*/
+                font-size: 15pt;
+                color: #011f4b; /*purple;*/
+                box-shadow: 5px 5px 20px rgba(128,128,128, 0.5);
+            }
+                /*item box Border*/
+                .vis.timeline .item,
+                .vis.timeline .item.line {
+                    border-width: 3px;
+                }
+                    /*The dot going from line to item box*/
+                    .vis.timeline .item.dot {
+                        border-width: 10px;
+                        border-radius: 10px;
+                    }
+
+                    .vis.timeline .item.selected {
+                        border-color: green;
+                        background-color: lightgreen;
+                    }
+
+            .vis.timeline .timeaxis .text {
+                color: red; /*purple*/
+                padding-top: 10px;
+                padding-left: 10px;
+            }
+
+                .vis.timeline .timeaxis .text.major {
+                    font-weight: bold;
+                }
+
+            .vis.timeline .timeaxis .grid.minor {
+                border-width: 2px;
+                border-color: white; /*pink*/
+            }
+
+            .vis.timeline .timeaxis .grid.major {
+                border-width: 2px;
+                border-color: #F991A3;
+            }
+
+            table .description {
+                font-style: italic;
+            }
+
+            #visualization {
+                position: relative;
+                overflow: hidden;
+            }
+
+            .logo {
+                position: absolute;
+                right: 10px;
+                top: 10px;
+            }
+
+                .logo img {
+                    width: 120px;
+                }
+        </style>
+    </head>
+    <body>
+        <h1 class="">World Cup Champions</h1>
+        <p style="max-width: 600px;">This timeline shows the countries that won the world cup from 1930 till 2014.</p>
+        
+        <div id="visualization">
+            <div class="logo"><img src="./img/trophy.jpg"></div>
+        </div>
+
+        <script type="text/javascript">
+            // create a handlebars template
+            var source = document.getElementById('item-template').innerHTML;
+            var template = Handlebars.compile(document.getElementById('item-template').innerHTML);
+
+            // DOM element where the Timeline will be attached
+            var container = document.getElementById('visualization');
+
+            //JSON array to hold data for visualization
+            var items = new vis.DataSet();
+
+            function loadCSV(file) {
+                var request;
+                if (window.XMLHttpRequest) {
+                    // IE7+, Firefox, Chrome, Opera, Safari
+                    request = new XMLHttpRequest();
+                } else {
+                    // code for IE6, IE5
+                    request = new ActiveXObject('Microsoft.XMLHTTP');
+                }
+                // load
+                request.open('GET', file, false);
+                request.send();
+                parseCSV(request.responseText);
+            }
+
+            function parseCSV(data) {
+                //replace UNIX new lines
+			    data = data.replace(/\r\n/g, "\n");
+			    //replace MAC new lines
+                data = data.replace(/\r/g, "\n");
+                //split into rows
+                var rows = data.split("\n");
+
+                // loop through all rows
+                for (var i = 1; i < rows.length; i++) {
+                    // this line helps to skip empty rows
+                    if (rows[i]) {
+                        // our columns are separated by comma
+                        var column = rows[i].split(",");
+                        var yr = column[0].toString().replace(/["']/g, ""); 
+					    var ab = column[1].toString().replace(/["']/g, "").toLowerCase();
+                        var cy = column[2].toString().replace(/["']/g, "");
+                        var st = column[0].toString().replace(/["']/g, "");
+                        items.add({ "year": yr, "winner": ab, "champion": cy, "start": st });
+                    }
+                }
+            }
+
+            loadCSV("data/awards/champions.csv");
+
+            // Configuration for the Timeline
+            var options = {
+                // specify a template for the items
+                template: template
+            };
+
+            // Create a Timeline
+            var timeline = new vis.Timeline(container, items, options);
+        </script>
+    </body>
+</html>
